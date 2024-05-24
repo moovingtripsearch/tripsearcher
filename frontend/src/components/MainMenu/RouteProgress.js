@@ -10,7 +10,7 @@ export default function RouteProgress({
 }){
 
     return (
-        <ul className="timeline">
+        <ul className="timeline" data-theme="light">
             <li>
                 <div className="timeline-start timeline-box">{origin}</div>
                 <div className="timeline-middle">

@@ -4,13 +4,17 @@ import '../../styles/Welcome.css';
 import ButtonVariants from './TopButton';
 import Dropdown from './Dropdown';
 import SearchFields from './SearchFields';
-import logoImage from '../../../public/assets/logo.jpg';
-import backgroundImage from '../../../public/assets/background.jpg';
+
+
 
 const WelcomePage = () => {
+
+  const myImage = require('../../../public/assets/background.jpg');
+  const logoImage = require('../../../public/assets/logo.jpg');
+
   return (
     <>
-  <div className="container">
+  <div className="container" data-theme="light">
     <div className="d-flex align-items-center justify-content-between">
       <img src={logoImage} alt="Logo" />
       
@@ -36,12 +40,10 @@ const WelcomePage = () => {
       </div>
     </div>
   </div>
-  <div
+  <div 
         className="position-relative"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          height: '500px',
-        }}
+        style={{ backgroundImage: `url(${myImage})`}}
+        data-theme="light" 
       >
     <div className="d-none d-xl-block position-absolute start-50 top-50 translate-middle">
       <p className="fw-bold text-white fs-1">Travel Enjoy Life . . .</p>

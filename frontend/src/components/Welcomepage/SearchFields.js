@@ -1,15 +1,34 @@
+
 import '../../styles/Welcome.css';
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
 
 export default function SearchFields(){
-    const [showVehiclesField, setShowVehiclesField] = useState(false);
-    const [showPriceField, setShowPriceField] = useState(false);
-    const [showLuggageField, setShowLuggageField] = useState(false);
+    
+  const [tripType, setTripType] = useState('');
+  const [geoLocation, setGeoLocation] = useState('');
+  const [showVehiclesField, setShowVehiclesField] = useState(false);
+  const [showPriceField, setShowPriceField] = useState(false);
+  const [showLuggageField, setShowLuggageField] = useState(false);
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [passengers, setPassengers] = useState(0);
+  const [vehicle, setVehicle] = useState('');
+  const [price, setPrice] = useState('');
+  const [luggage, setLuggage] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');    
 
-    useEffect(() => {
-        // Handle initial rendering of fields based on initial state
-        // You can add any additional logic here if needed
-    }, []);
+  useEffect(() => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      setGeoLocation(`${latitude},${longitude}`);
+    },
+    (error) => {
+      console.error('Error getting location:', error);
+    }
+  ); }, []);
 
     const handleVehiclesFieldCheckbox = () => {
         setShowVehiclesField(!showVehiclesField);
@@ -24,28 +43,31 @@ export default function SearchFields(){
     };
 
     return (
-        <>
-      <div className="rounded p-3 bg-cp" style={{ marginTop: '45%', width: 1000 }}>
-        <MainSearch />
-        {/* Filter fields */}
-        <div className="d-flex align-items-center py-2">
-            {showVehiclesField && <VehiclesField />}
-            {!showPriceField && <PriceField />}
-            {showLuggageField && <LuggageField />}
+      <div data-theme="light">
+        <div className="rounded p-3 bg-cp" style={{ marginTop: '45%', width: 1000 }}>
+          <MainSearch setOrigin={setOrigin} setDestination={setDestination}
+          
+                      setDate={setDate} setTime={setTime} setPassengers={setPassengers}/>
+          {/* Filter fields */}
+          <div className="d-flex align-items-center py-2">
+              {showVehiclesField && <VehiclesField vehicle={vehicle} setVehicle={setVehicle} />}
+              {showPriceField && <PriceField price={price} setPrice={setPrice} />}
+              {showLuggageField && <LuggageField luggage={luggage} setLuggage={setLuggage} />}
+          </div>
+          {/* footer items*/}
+          <Footer
+            handleVehiclesFieldCheckbox={handleVehiclesFieldCheckbox}
+            handlePriceFieldCheckbox={handlePriceFieldCheckbox}
+            handleLuggageFieldCheckbox={handleLuggageFieldCheckbox}
+          />
         </div>
-        {/* footer items*/}
-        <Footer
-          handleVehiclesFieldCheckbox={handleVehiclesFieldCheckbox}
-          handlePriceFieldCheckbox={handlePriceFieldCheckbox}
-          handleLuggageFieldCheckbox={handleLuggageFieldCheckbox}
-        />
-      </div>
-    </>
+    </div>
     )
 }
 
 
-export function MainSearch(){
+export function MainSearch({setOrigin, setDestination, setDate, setTime, setPassengers}){
+
     return(
         <>
         <div className="d-flex align-items-center">
@@ -92,6 +114,7 @@ export function MainSearch(){
                 list="datalistOptions"
                 id="exampleDataList"
                 placeholder="City or quarter"
+                onChange={(e) => setOrigin(e.target.value)}
                 />
                 <datalist id="datalistOptions">
                 <option value="Polytechnique Yaounde"></option>
@@ -109,6 +132,7 @@ export function MainSearch(){
                 list="datalistOptions"
                 id="exampleDataList"
                 placeholder="City or quarter"
+                onChange={(e) => setDestination(e.target.value)}
                 />
                 <datalist id="datalistOptions">
                 <option value="Polytechnique Yaounde"></option>
@@ -127,6 +151,7 @@ export function MainSearch(){
                     type="text"
                     className="grow"
                     list="datalistNumber"
+                    onChange={(e) => setPassengers(e.target.value)}
                     style={{ width: "50px" }}
                     />
                     <span className="badge badge-info">Optional</span>
@@ -150,6 +175,7 @@ export function MainSearch(){
             name=""
             id=""
             className="form-control date-input" styles={{borderRadius: '25px'}}
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
         <div className="d-flex flex-column">
@@ -161,6 +187,7 @@ export function MainSearch(){
             name=""
             id=""
             className="form-control time-input"
+            onChange={(e) => setTime(e.target.value)}
           />
         </div>
         </div>
@@ -172,7 +199,8 @@ export function MainSearch(){
 }
 
 
-export function VehiclesField() {
+export function VehiclesField({vehicle, setVehicle}) {
+
   return (
     <div id="VehiclesField">
       <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
@@ -183,6 +211,7 @@ export function VehiclesField() {
         list="datalistVehicle"
         id="vehicleData"
         placeholder="Vehicle"
+        onChange={(e) => setVehicle(e.target.value)}
       />
       <datalist id="datalistVehicle">
         <option value="Personal Car"></option>
@@ -195,18 +224,22 @@ export function VehiclesField() {
   );
 }
 
-export function PriceField() {
+export function PriceField(price, setPrice) {
   return (
     <div id="PriceField">
       <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
         Price
       </label>
-      <input className="form-control inp-width inp-height" id="PriceData" placeholder="Price (FCFA)" />
+      <input className="form-control inp-width inp-height" 
+      id="PriceData" 
+      placeholder="Price (FCFA)"
+      onChange={(e) => setPrice(e.target.value)}
+       />
     </div>
   );
 }
 
-export function LuggageField() {
+export function LuggageField(luggage, setLuggage) {
   return (
     <div id="LuggageField">
       <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
@@ -217,6 +250,7 @@ export function LuggageField() {
         list="datalistLug"
         id="lugData"
         placeholder="Furnitures, animals, etc..."
+        onChange={(e) => setLuggage(e.target.value)}
       />
       <datalist id="datalistLug">
         <option value="Bags"></option>
@@ -231,29 +265,54 @@ export function LuggageField() {
 
 
 export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, handleLuggageFieldCheckbox }){
-    return (
-    <>
+    const handleSearch = () => {
+      const userQuery = {
+        origin,
+        destination,
+        tripType,
+        geoLocation,
+        date,
+        time,
+      };
+
+      const userFilter = {
+        vehicle,
+        price,
+        luggage,
+        maxPrice,
+      };
+
+      const requestData = {
+        user_query: userQuery,
+        user_filter: userFilter,
+      };
+
+      // Send the request data to the backend using Axios
+      axios
+        .get(`http://localhost:8090/api/trip/search?user_query=${JSON.stringify(requestData)}`)
+        .then((response) => {
+          // Handle the response from the backend
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error(error);
+        });
+    };  
+  
+  
+  return (
+
+    <div>
       <div className="d-flex align-items-center justify-content-between">
         <div className="p_filter">
-          <p
-            style={{
-              color: 'blue',
-              fontWeight: 'bold',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <p style={{color: 'blue', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center'}}>
             Filters
           </p>
         </div>
         <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            defaultValue=""
-            id="flexCheckVehicles"
-            onClick={handleVehiclesFieldCheckbox}
-          />
+          <input className="form-check-input" type="checkbox" defaultValue="" id="flexCheckVehicles"
+            onClick={handleVehiclesFieldCheckbox}/>
           <label className="form-check-label fw-bold fs-8" htmlFor="flexCheckVehicles">
             vehicles
           </label>
@@ -283,10 +342,10 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
             Luggages
           </label>
         </div>
-        <a href="MainMenu/mainMenu.html">
-          <div className="btn btn-dark fw-bold btn-lg inp-width inp-width-h">Search journey</div>
-        </a>
+        
+          <button className="btn btn-dark fw-bold btn-lg inp-width inp-width-h" type='submit' onClick={handleSearch}>Search journey</button>
+        
       </div>
-    </>
+    </div>
   );
 }

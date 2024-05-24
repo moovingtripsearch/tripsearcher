@@ -95,7 +95,7 @@ export default function RightBody() {
                     <option value="Other" />
                   </datalist>
                 </span>
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" type="submit" data-theme="light">
                   Search
                 </button>
               </form>
@@ -131,7 +131,7 @@ export default function RightBody() {
         </div>
         <div className="sort">
           Sort by :
-          <select name="options" id="options">
+          <select name="options" id="options" data-theme="light">
             <option value="option1">Cheapest</option>
             <option value="option2">Costly</option>
             <option value="option3">Most popular</option>
