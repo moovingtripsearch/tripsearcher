@@ -1,0 +1,181 @@
+// pages/trip.js
+
+export async function getServerSideProps() {
+  const userQuery = {
+    origin: "New York",
+    destination: "Los Angeles",
+    trip_type: "ONE_WAY",
+    geo_location: {
+      lat: 40.7128,
+      lon: -74.0060
+    }
+  };
+
+  const userFilter = {
+    min_price: 100.0,
+    max_price: 500.0,
+    luggage_type: ["SMALL", "MEDIUM"],
+    vehicle_type: "Sedan",
+    number_of_seats: 4,
+    agency_name: "Travel Agency",
+    allow_origin_as_stop_point: true,
+    allow_destination_as_stop_point: false,
+    max_distance_from_station: 10.0
+  };
+
+  const encodeParams = (params) => {
+    return encodeURIComponent(JSON.stringify(params));
+  };
+
+  const userQueryParam = encodeParams(userQuery);
+  const userFilterParam = encodeParams(userFilter);
+
+  const url = `http://localhost:8090/api/trip/search?user_query=${userQueryParam}&user_filter=${userFilterParam}`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
+const TripPage = ({ data }) => {
+  return (
+    <div>
+      <h1>Trip Results</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
+
+export default TripPage;
+// Example
+
+
+{
+  "user_query":{
+    "origin": "Dschn",
+    "destination": "sfdf",
+    "trip_type": "",
+    "geo_location": " sdf",
+    "date": "",
+    "time": ""
+  },
+  "user_filter":{
+    "max_price: 
+
+  }
+}
+axios.get("http://localhost:8090/api/trip/search?user_query={}")
+
+
+"hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
+    },
+    "max_score": 12.503886,
+    "hits": [
+      {
+        "_index": "trip",
+        "_id": "1",
+        "_score": 12.503886,
+        "_source": {
+          "trip_id": 1,
+          "departure_time": "2024-05-03T12:49:00Z",
+          "price": 5000,
+          "is_active": true,
+          "trip_type": "inter",
+          "luggage_type": [
+            "animal",
+            "bag"
+          ],
+          "agency": {
+            "agency_name": "General Express Voyages",
+            "agency_logo": "https://www.freepik.com/free-vector/flat-vintage-travel-logo_4623649.htm#fromView=search&page=1&position=9&uuid=0fe56d3b-c5e9-4b0b-8a1a-dc86103f4fc2"
+          },
+          "vehicle": {
+            "vehicle_id": 1231430,
+            "vehicle_type": "bus",
+            "brand": "VMW",
+            "number_of_seats": 70
+          },
+          "station": {
+            "station_id": 134214432,
+            "station_name": "General Youpwe",
+            "station_location": {
+              "id": 923991871,
+              "place": "suburb",
+              "coordinates": {
+                "lat": 4.010509199586527,
+                "lon": 9.699614000000002
+              },
+              "name": "Youpwe"
+            }
+          },
+          "origin": {
+            "id": 2460695255,
+            "place": "village",
+            "coordinates": {
+              "lat": 3.919703499594625,
+              "lon": 9.703812
+            },
+            "name": "Dongo I"
+          },
+          "destination": {
+            "id": 2460695274,
+            "place": "village",
+            "coordinates": {
+              "lat": 3.830910399602656,
+              "lon": 9.6939971
+            },
+            "name": "Epassi"
+          },
+          "stop_points": [
+            {
+              "point": {
+                "id": 2460695274,
+                "place": "village",
+                "coordinates": {
+                  "lat": 3.830910399602656,
+                  "lon": 9.6939971
+                },
+                "name": "Epassi"
+              },
+              "pickup": true,
+              "drop": true
+            },
+            {
+              "point": {
+                "id": 2460695346,
+                "place": "town",
+                "coordinates": {
+                  "lat": 3.8612466995999015,
+                  "lon": 9.6235775
+                },
+                "name": "Manoka"
+              },
+              "pickup": true,
+              "drop": false
+            },
+            {
+              "point": {
+                "id": 2460695246,
+                "place": "village",
+                "coordinates": {
+                  "lat": 3.8676951995993165,
+                  "lon": 9.621917
+                },
+                "name": "Dahomey"
+              },
+              "pickup": false,
+              "drop": false
+            }
+          ]
+        }
+      }
+    ]
+  }

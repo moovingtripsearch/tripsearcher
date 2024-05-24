@@ -1,0 +1,223 @@
+
+.topbutton{
+    display: flex;
+    gap: 10px;
+}
+
+.date-input,
+.time-input {
+  width: 120px;
+  height: 55px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.date-input:focus,
+.time-input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  text-align: center;
+}
+
+.bg-cp{
+    background-color: #d3d6db;
+}
+
+.fs-7 {
+    font-size: 15px;
+}
+
+.fs-8 {
+    font-size: 13px;
+}
+
+.position-relative .inp-width{
+    width: 240px;
+}
+
+.inp-width-h:hover{
+    background-color: blue;
+}
+
+.position-relative .inp-width2{
+    width: 195px;
+}
+
+.position-relative .inp-height {
+    height: 52px;
+}
+
+.date-wid{
+    width: 220px;
+}
+
+.container .option_bar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown select{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+/*
+ <div className="d-block d-xl-none rounded-2 bg-cp py-3 px-3">
+    <div className="d-flex align-items-center">
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+        />
+        <label className="form-check-label" htmlFor="flexRadioDefault1">
+          Return
+        </label>
+      </div>
+      <div className="form-check mx-2">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+        />
+        <label
+          className="form-check-label fw-bold fs-7"
+          htmlFor="flexRadioDefault2"
+        >
+          One way
+        </label>
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+        />
+        <label
+          className="form-check-label fw-bold fs-7"
+          htmlFor="flexRadioDefault2"
+        >
+          Multi-City way
+        </label>
+      </div>
+    </div>
+    <div>
+      <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
+        From
+      </label>
+      <input
+        className="form-control inp-width inp-height"
+        list="datalistOptions"
+        id="exampleDataList"
+        placeholder="City or quarter"
+      />
+      <datalist id="datalistOptions">
+        <option value="Polytechnique Yaounde"></option>
+      </datalist>
+    </div>
+    <div className="form-check py-2">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        name="flexCheckChecked"
+        defaultChecked=""
+      />
+      <label
+        className="form-check-label fw-bold fs-8"
+        htmlFor="flexCheckChecked"
+      >
+        Add nearby agencies
+      </label>
+    </div>
+    <div>
+      <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
+        To
+      </label>
+      <input
+        className="form-control inp-width inp-height"
+        list="datalistOptions"
+        id="exampleDataList"
+        placeholder="City or quarter"
+      />
+      <datalist id="datalistOptions">
+        <option value="Polytechnique Yaounde"></option>
+      </datalist>
+    </div>
+    <div className="form-check py-2">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        name="flexCheckChecked"
+      />
+      <label
+        className="form-check-label fw-bold fs-8"
+        htmlFor="flexCheckChecked"
+      >
+        Add nearby agencies
+      </label>
+    </div>
+    <div className="d-flex align-items-center justify-content-between">
+      <div>
+        <label htmlFor="" className="fw-bold fs-8 date-wid">
+          Departure date
+        </label>
+        <input type="date" name="" id="" className="form-control inp-height" />
+      </div>
+      <div>
+        <label htmlFor="" className="fw-bold fs-8 date-wid">
+          Departure time
+        </label>
+        <input type="time" name="" id="" className="form-control inp-height" />
+      </div>
+    </div>
+    <div className="py-2">
+      <div>
+        <label htmlFor="" className="fw-bold fs-8">
+          Cabin class &amp; Travellers
+        </label>
+        <select
+          className="form-select inp-height"
+          aria-label="Default select example"
+        >
+          <option selected="">Open this select menu</option>
+          <option value={1}>One</option>
+          <option value={2}>Two</option>
+          <option value={3}>Three</option>
+          <option value={4}>Four</option>
+          <option value={5}>Five</option>
+        </select>
+      </div>
+      <div className="form-check py-2">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          name="flexCheckChecked"
+        />
+        <label
+          className="form-check-label fw-bold fs-8"
+          htmlFor="flexCheckChecked"
+        >
+          Direct journey
+        </label>
+      </div>
+      <div className="py-3">
+        <div className="btn btn-dark fw-bold form-control">Search journey</div>
+      </div>
+    </div>
+  </div>
+  */
