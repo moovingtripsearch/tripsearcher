@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState} from 'react';
 import MyApp from '../../pages/app';
 import '../../styles/Welcome.css';
 import ButtonVariants from './TopButton';
@@ -16,7 +17,7 @@ const WelcomePage = () => {
   const handleTripTypeChange = (type) => {
     setTripType(type);
   };
-  
+
   return (
     <>
   <div className="container" data-theme="light">
