@@ -1,4 +1,3 @@
-
 import '../../styles/Welcome.css';
 import {useState, useEffect} from 'react';
 
@@ -18,6 +17,41 @@ export default function SearchFields(){
   const [price, setPrice] = useState('');
   const [luggage, setLuggage] = useState('');
   const [maxPrice, setMaxPrice] = useState('');    
+
+const handleSearch = () => {
+      const userQuery = {
+        origin,
+        destination,
+        tripType,
+        geoLocation,
+        date,
+        time,
+      };
+
+      const userFilter = {
+        vehicle,
+        price,
+        luggage,
+        maxPrice,
+      };
+
+      const requestData = {
+        user_query: userQuery,
+        user_filter: userFilter,
+      };
+
+      // Send the request data to the backend using Axios
+      axios
+        .get(`http://localhost:8090/api/trip/search?user_query=${JSON.stringify(requestData)}`)
+        .then((response) => {
+          // Handle the response from the backend
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error(error);
+        });
+    };  
 
   useEffect(() => {
   navigator.geolocation.getCurrentPosition(
@@ -45,6 +79,7 @@ export default function SearchFields(){
     return (
       <div data-theme="light">
         <div className="rounded p-3 bg-cp" style={{ marginTop: '45%', width: 1000 }}>
+
           <MainSearch setOrigin={setOrigin} setDestination={setDestination}
           
                       setDate={setDate} setTime={setTime} setPassengers={setPassengers}/>
@@ -54,7 +89,9 @@ export default function SearchFields(){
               {showPriceField && <PriceField price={price} setPrice={setPrice} />}
               {showLuggageField && <LuggageField luggage={luggage} setLuggage={setLuggage} />}
           </div>
+          
           {/* footer items*/}
+          
           <Footer
             handleVehiclesFieldCheckbox={handleVehiclesFieldCheckbox}
             handlePriceFieldCheckbox={handlePriceFieldCheckbox}
@@ -265,42 +302,7 @@ export function LuggageField(luggage, setLuggage) {
 
 
 export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, handleLuggageFieldCheckbox }){
-    const handleSearch = () => {
-      const userQuery = {
-        origin,
-        destination,
-        tripType,
-        geoLocation,
-        date,
-        time,
-      };
-
-      const userFilter = {
-        vehicle,
-        price,
-        luggage,
-        maxPrice,
-      };
-
-      const requestData = {
-        user_query: userQuery,
-        user_filter: userFilter,
-      };
-
-      // Send the request data to the backend using Axios
-      axios
-        .get(`http://localhost:8090/api/trip/search?user_query=${JSON.stringify(requestData)}`)
-        .then((response) => {
-          // Handle the response from the backend
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Handle the error
-          console.error(error);
-        });
-    };  
-  
-  
+      
   return (
 
     <div>
@@ -343,7 +345,7 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
           </label>
         </div>
         
-          <button className="btn btn-dark fw-bold btn-lg inp-width inp-width-h" type='submit' onClick={handleSearch}>Search journey</button>
+          <button className="btn btn-dark fw-bold btn-lg inp-width inp-width-h" type='submit'>Search journey</button>
         
       </div>
     </div>
