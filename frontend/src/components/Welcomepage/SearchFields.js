@@ -1,9 +1,8 @@
 import '../../styles/Welcome.css';
 import {useState, useEffect} from 'react';
 
-export default function SearchFields(){
+export default function SearchFields({ tripType }){
     
-  const [tripType, setTripType] = useState('');
   const [geoLocation, setGeoLocation] = useState('');
   const [showVehiclesField, setShowVehiclesField] = useState(false);
   const [showPriceField, setShowPriceField] = useState(false);
@@ -17,6 +16,9 @@ export default function SearchFields(){
   const [price, setPrice] = useState('');
   const [luggage, setLuggage] = useState('');
   const [maxPrice, setMaxPrice] = useState('');    
+
+
+/* Information sent to backend */
 
 const handleSearch = () => {
       const userQuery = {
@@ -33,6 +35,7 @@ const handleSearch = () => {
         price,
         luggage,
         maxPrice,
+        passengers,
       };
 
       const requestData = {
@@ -64,6 +67,15 @@ const handleSearch = () => {
     }
   ); }, []);
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    handleSearch(); // Call the handleSearch function
+  };
+
+  /* Information sent to backend */
+
+
     const handleVehiclesFieldCheckbox = () => {
         setShowVehiclesField(!showVehiclesField);
     };
@@ -80,6 +92,8 @@ const handleSearch = () => {
       <div data-theme="light">
         <div className="rounded p-3 bg-cp" style={{ marginTop: '45%', width: 1000 }}>
 
+        <form onSubmit={handleSubmit}>
+          {/* Main data for search */}
           <MainSearch setOrigin={setOrigin} setDestination={setDestination}
           
                       setDate={setDate} setTime={setTime} setPassengers={setPassengers}/>
@@ -91,16 +105,23 @@ const handleSearch = () => {
           </div>
           
           {/* footer items*/}
+          <div className="d-flex align-items-center justify-content-between">
+            <Footer
+              handleVehiclesFieldCheckbox={handleVehiclesFieldCheckbox}
+              handlePriceFieldCheckbox={handlePriceFieldCheckbox}
+              handleLuggageFieldCheckbox={handleLuggageFieldCheckbox}
+            />
+            
+            <button className="btn btn-dark fw-bold btn-lg inp-width inp-width-h" type='submit'>Search journey</button>            
           
-          <Footer
-            handleVehiclesFieldCheckbox={handleVehiclesFieldCheckbox}
-            handlePriceFieldCheckbox={handlePriceFieldCheckbox}
-            handleLuggageFieldCheckbox={handleLuggageFieldCheckbox}
-          />
+          </div>
+
+        </form>
         </div>
     </div>
     )
 }
+
 
 
 export function MainSearch({setOrigin, setDestination, setDate, setTime, setPassengers}){
@@ -305,8 +326,7 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
       
   return (
 
-    <div>
-      <div className="d-flex align-items-center justify-content-between">
+    <div style={{display: 'flex', gap: '20%'}}>      
         <div className="p_filter">
           <p style={{color: 'blue', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center'}}>
             Filters
@@ -344,10 +364,6 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
             Luggages
           </label>
         </div>
-        
-          <button className="btn btn-dark fw-bold btn-lg inp-width inp-width-h" type='submit'>Search journey</button>
-        
-      </div>
-    </div>
+     </div>   
   );
 }
