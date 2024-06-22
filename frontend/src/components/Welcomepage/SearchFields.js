@@ -70,7 +70,8 @@ const handleSearch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    handleSearch(); // Call the handleSearch function
+    console.log(e)
+    // handleSearch(); // Call the handleSearch function
   };
 
   /* Information sent to backend */
