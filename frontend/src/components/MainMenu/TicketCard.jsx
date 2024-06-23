@@ -24,7 +24,7 @@ const TicketCard = ({
     for (let i = 0; i < 5; i++) {
       stars.push(
         <span key={i} className={`star ${i < count ? 'filled' : ''}`}>
-          {i < count ? <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" /> 
+          {i < count ? <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" defaultChecked /> 
                           
                           : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />}
         </span>

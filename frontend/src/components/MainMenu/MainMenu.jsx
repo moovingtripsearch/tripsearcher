@@ -178,7 +178,7 @@ const MainMenu = () => {
         {/* Logo */}
         <Link href="#" className="logo-box" onClick={toggleSidebar}>
           <i className="bx bxl-xing" />
-          <div className="logo-name">Trip Search</div>
+          <div className="logo-name">Moving.com</div>
         </Link>
 
         {/* Sidebar List */}
