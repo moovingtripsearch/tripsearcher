@@ -39,7 +39,7 @@ export default function ButtonVariants({ onTripTypeChange }) {
           </div>
         </dialog>
       )}
-
+{/* 
       <div role="alert" className="alert alert-info position-absolute bottom-0 end-10 max-w-2xl">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
           className="stroke-current shrink-0 w-6 h-6">
@@ -50,6 +50,7 @@ export default function ButtonVariants({ onTripTypeChange }) {
         </svg>
         <span>Search for an {selectedType}</span>
       </div>
+*/}
     </>
   );
 }

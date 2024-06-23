@@ -7,6 +7,146 @@ import TicketCard from './TicketCard';
 import RightBody from './RightBody';
 
 const MainMenu = () => {
+
+  const dummyTrips = [
+    {
+      "_id": "1",
+      "_source": {
+        "trip_id": 1,
+        "departure_time": "2024-05-03T12:49:00Z",
+        "price": 5000,
+        "trip_type": "inter",
+        "agency": {
+          "agency_name": "General Express Voyages",
+        },
+        "vehicle": {
+          "vehicle_type": "bus",
+        },
+        "station": {
+          "station_name": "General Youpwe",
+        },
+        "origin": {
+          "name": "Dongo I"
+        },
+        "destination": {
+          "name": "Epassi"
+        },
+        "stop_points": [
+          { "point": { "name": "Epassi" } },
+          { "point": { "name": "Manoka" } },
+          { "point": { "name": "Dahomey" } },
+        ]
+      }
+    },
+    {
+      "_id": "2",
+      "_source": {
+        "trip_id": 2,
+        "departure_time": "2024-05-04T10:30:00Z",
+        "price": 3000,
+        "trip_type": "urban",
+        "agency": {
+          "agency_name": "City Movers",
+        },
+        "vehicle": {
+          "vehicle_type": "taxi",
+        },
+        "station": {
+          "station_name": "Central Station",
+        },
+        "origin": {
+          "name": "Downtown"
+        },
+        "destination": {
+          "name": "Airport"
+        },
+        "stop_points": [
+          { "point": { "name": "Mall" } },
+          { "point": { "name": "University" } },
+        ]
+      }
+    },
+    {
+      "_id": "3",
+      "_source": {
+        "trip_id": 3,
+        "departure_time": "2024-05-05T08:00:00Z",
+        "price": 10000,
+        "trip_type": "inter",
+        "agency": {
+          "agency_name": "Long Distance Tours",
+        },
+        "vehicle": {
+          "vehicle_type": "bus",
+        },
+        "station": {
+          "station_name": "Main Terminal",
+        },
+        "origin": {
+          "name": "Yaounde"
+        },
+        "destination": {
+          "name": "Douala"
+        },
+        "stop_points": [
+          { "point": { "name": "Edea" } },
+        ]
+      }
+    },
+    {
+      "_id": "4",
+      "_source": {
+        "trip_id": 4,
+        "departure_time": "2024-05-06T15:45:00Z",
+        "price": 2000,
+        "trip_type": "urban",
+        "agency": {
+          "agency_name": "Quick Ride",
+        },
+        "vehicle": {
+          "vehicle_type": "bike",
+        },
+        "station": {
+          "station_name": "East Point",
+        },
+        "origin": {
+          "name": "Market"
+        },
+        "destination": {
+          "name": "Residential Area"
+        },
+        "stop_points": []
+      }
+    },
+    {
+      "_id": "5",
+      "_source": {
+        "trip_id": 5,
+        "departure_time": "2024-05-07T07:30:00Z",
+        "price": 7000,
+        "trip_type": "inter",
+        "agency": {
+          "agency_name": "Comfort Travels",
+        },
+        "vehicle": {
+          "vehicle_type": "car",
+        },
+        "station": {
+          "station_name": "North Station",
+        },
+        "origin": {
+          "name": "Bafoussam"
+        },
+        "destination": {
+          "name": "Bamenda"
+        },
+        "stop_points": [
+          { "point": { "name": "Mbouda" } },
+          { "point": { "name": "Bamessing" } },
+        ]
+      }
+    }
+  ];
   
   const [isOpen, setIsOpen] = useState(false);
  
@@ -249,6 +389,28 @@ const MainMenu = () => {
           fare="500 FCFA"
           transportType="Car"
         />
+
+        {dummyTrips.map((trip) => (
+          <TicketCard 
+            key={trip._id}
+            agency={trip._source.agency.agency_name}
+            station={trip._source.station.station_name}
+            rating={3} // As rating is not provided in the data, we're using a default value
+            //day={formatDateTime(trip._source.departure_time).split(' ')[0]}
+            day={trip._source.departure_time[0]}
+            //time={formatDateTime(trip._source.departure_time).split(' ')[1]}
+            time={trip._source.departure_time[1]}
+            origin={trip._source.origin.name}
+            destination={trip._source.destination.name}
+            StoppingP1={trip._source.stop_points[0]?.point.name || ''}
+            StoppingP2={trip._source.stop_points[1]?.point.name || ''}
+            StoppingP3={trip._source.stop_points[2]?.point.name || ''}
+            StoppingP4={trip._source.stop_points[3]?.point.name || ''}
+            fare={`${trip._source.price} FCFA`}
+            transportType={trip._source.vehicle.vehicle_type}
+          />
+        ))}
+
       </section>
     </div>
   );
