@@ -89,7 +89,7 @@ const handleSubmit = (e) => {
 
     return (
       <div data-theme="light">
-        <div className="rounded p-3 bg-cp" style={{ marginTop: '45%', width: 1000 }}>
+        <div className="rounded p-3 bg-cp" style={{ marginTop: '85%', width: 1000 }}>
 
         <form onSubmit={handleSubmit}>
           {/* Main data for search */}

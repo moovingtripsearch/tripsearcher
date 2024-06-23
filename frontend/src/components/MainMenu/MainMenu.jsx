@@ -360,36 +360,6 @@ const MainMenu = () => {
 
         <RightBody />
 
-        <TicketCard 
-          agency = 'Personal'
-          station = 'Mobile'
-          rating = {3}
-          day = 'Today'
-          time = '13:30 - 14:00'
-          origin = 'Yaounde'
-          destination = 'Bafoussam'
-          StoppingP1 = 'Makenene'
-          StoppingP2 = 'Bamegoum'
-          StoppingP3 = 'Bouda'
-          StoppingP4 = ' '
-          fare = '1 000 FCFA'
-          transportType = 'Bike'
-        />
-
-        <TicketCard
-          agency="Agency 35"
-          station="Station 35.6"
-          rating={4}
-          origin="Poste"
-          destination="Messassi"
-          StoppingP1 = "Avenue Kennedy"
-          StoppingP2 = "Borne Fontaine"
-          StoppingP3 = "Emana"
-          StoppingP4 = " "
-          fare="500 FCFA"
-          transportType="Car"
-        />
-
         {dummyTrips.map((trip) => (
           <TicketCard 
             key={trip._id}
@@ -397,9 +367,9 @@ const MainMenu = () => {
             station={trip._source.station.station_name}
             rating={3} // As rating is not provided in the data, we're using a default value
             //day={formatDateTime(trip._source.departure_time).split(' ')[0]}
-            day={trip._source.departure_time[0]}
+            day={trip._source.departure_time.substring(0, 10)}
             //time={formatDateTime(trip._source.departure_time).split(' ')[1]}
-            time={trip._source.departure_time[1]}
+            time={trip._source.departure_time.substring(11, 19)}
             origin={trip._source.origin.name}
             destination={trip._source.destination.name}
             StoppingP1={trip._source.stop_points[0]?.point.name || ''}

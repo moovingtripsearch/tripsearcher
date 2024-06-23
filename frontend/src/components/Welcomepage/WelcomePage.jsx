@@ -1,19 +1,19 @@
 import React from 'react';
 import {useState} from 'react';
+import Image from 'next/image';
 import MyApp from '../../pages/app';
 import '../../styles/Welcome.css';
 import ButtonVariants from './TopButton';
 import Dropdown from './Dropdown';
 import SearchFields from './SearchFields';
-
+import logoImage from '../../../public/assets/logo.jpg'
+import myImage from '../../../public/assets/img2.jpg' 
 
 
 const WelcomePage = () => {
 
   const [tripType, setTripType] = useState('');
-  const myImage = require('../../../public/assets/background.jpg');
-  const logoImage = require('../../../public/assets/logo.jpg');
-
+  
   const handleTripTypeChange = (type) => {
     setTripType(type);
   };
@@ -22,7 +22,8 @@ const WelcomePage = () => {
     <>
   <div className="container" data-theme="light">
     <div className="d-flex align-items-center justify-content-between">
-      <img src={logoImage} alt="Logo" />
+      <Image 
+        src={logoImage} alt="Logo" width={200} height={200}/>
       
       <div className="d-none d-xl-flex align-items-center">
         <p className="fw_bold text-primary m-0">Login</p>
