@@ -44,6 +44,7 @@
 
 .position-relative .inp-width{
     width: 240px;
+    margin-bottom: 10px;
 }
 
 .inp-width-h:hover{
@@ -52,6 +53,7 @@
 
 .position-relative .inp-width2{
     width: 195px;
+    margin-bottom: 10px;
 }
 
 .position-relative .inp-height {
@@ -59,7 +61,8 @@
 }
 
 .date-wid{
-    width: 220px;
+    width: 230px;
+    margin-bottom: 10px;
 }
 
 .container .option_bar{

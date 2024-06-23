@@ -3,76 +3,74 @@ import {useState, useEffect} from 'react';
 
 export default function SearchFields({ tripType }){
     
-  const [geoLocation, setGeoLocation] = useState('');
   const [showVehiclesField, setShowVehiclesField] = useState(false);
   const [showPriceField, setShowPriceField] = useState(false);
   const [showLuggageField, setShowLuggageField] = useState(false);
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [passengers, setPassengers] = useState(0);
-  const [vehicle, setVehicle] = useState('');
-  const [price, setPrice] = useState('');
-  const [luggage, setLuggage] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');    
+   
+  const [query, setQuery] = useState({
+    origin: '',
+    destination: '',
+    trip_type: tripType, // Default value, you might want to make this selectable
+    geo_location: { lat: null, lon: null }
+  });
+
+  const [filters, setFilters] = useState({
+    min_price: null,
+    max_price: null,
+    luggage_type: [],
+    vehicle_type: '',
+    number_of_seats: 0,
+    agency_name: '',
+    allow_origin_as_stop_point: false,
+    allow_destination_as_stop_point: false,
+    max_distance_from_station: null,
+    date: '',
+    time: ''
+  });
 
 
-/* Information sent to backend */
+  /* Information sent to backend */
 
-const handleSearch = () => {
-      const userQuery = {
-        origin,
-        destination,
-        tripType,
-        geoLocation,
-        date,
-        time,
-      };
+  const handleSearch = () => {
+    const requestData = {
+      query,
+      filters
+    };
 
-      const userFilter = {
-        vehicle,
-        price,
-        luggage,
-        maxPrice,
-        passengers,
-      };
+    console.log('Search Data:', JSON.stringify(requestData, null, 2));
 
-      const requestData = {
-        user_query: userQuery,
-        user_filter: userFilter,
-      };
+    // Send the request data to the backend using Axios
+    axios
+      .get(`http://localhost:8090/api/trip/search?user_query=${JSON.stringify(requestData)}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };  
 
-      // Send the request data to the backend using Axios
-      axios
-        .get(`http://localhost:8090/api/trip/search?user_query=${JSON.stringify(requestData)}`)
-        .then((response) => {
-          // Handle the response from the backend
-          console.log(response.data);
-        })
-        .catch((error) => {
-          // Handle the error
-          console.error(error);
-        });
-    };  
 
   useEffect(() => {
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
-      setGeoLocation(`${latitude},${longitude}`);
+      setQuery(prevQuery => ({
+        ...prevQuery,
+        geo_location: { lat: latitude, lon: longitude }
+      }));
     },
     (error) => {
       console.error('Error getting location:', error);
     }
-  ); }, []);
+  );
+}, []);
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    console.log(e)
-    // handleSearch(); // Call the handleSearch function
-  };
+const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch();
+};
 
   /* Information sent to backend */
 
@@ -95,14 +93,17 @@ const handleSearch = () => {
 
         <form onSubmit={handleSubmit}>
           {/* Main data for search */}
-          <MainSearch setOrigin={setOrigin} setDestination={setDestination}
-          
-                      setDate={setDate} setTime={setTime} setPassengers={setPassengers}/>
+          <MainSearch setQuery={setQuery} setFilters={setFilters} />
+
           {/* Filter fields */}
-          <div className="d-flex align-items-center py-2">
-              {showVehiclesField && <VehiclesField vehicle={vehicle} setVehicle={setVehicle} />}
-              {showPriceField && <PriceField price={price} setPrice={setPrice} />}
-              {showLuggageField && <LuggageField luggage={luggage} setLuggage={setLuggage} />}
+          <div className="d-flex align-items-center py-2 gap-4">
+
+              {showPriceField && <PriceField filters={filters} setFilters={setFilters} />}              
+
+              {showLuggageField && <LuggageField filters={filters} setFilters={setFilters} />}              
+
+              {showVehiclesField && <VehiclesField filters={filters} setFilters={setFilters} />}
+
           </div>
           
           {/* footer items*/}
@@ -125,7 +126,7 @@ const handleSearch = () => {
 
 
 
-export function MainSearch({setOrigin, setDestination, setDate, setTime, setPassengers}){
+export function MainSearch({setQuery, setFilters}){
 
     return(
         <>
@@ -169,12 +170,13 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
                 From
                 </label>
                 <input
-                className="form-control inp-width inp-height"
-                list="datalistOptions"
-                id="exampleDataList"
-                placeholder="City or quarter"
-                onChange={(e) => setOrigin(e.target.value)}
+                  className="form-control inp-width inp-height"
+                  list="datalistOptions"
+                  id="originInput"
+                  placeholder="City or quarter"
+                  onChange={(e) => setQuery(prevQuery => ({...prevQuery, origin: e.target.value}))}
                 />
+              
                 <datalist id="datalistOptions">
                 <option value="Polytechnique Yaounde"></option>
                 </datalist>
@@ -187,11 +189,11 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
                 To
                 </label>
                 <input
-                className="form-control inp-width inp-height"
-                list="datalistOptions"
-                id="exampleDataList"
-                placeholder="City or quarter"
-                onChange={(e) => setDestination(e.target.value)}
+                  className="form-control inp-width inp-height"
+                  list="datalistOptions"
+                  id="destinationInput"
+                  placeholder="City or quarter"
+                  onChange={(e) => setQuery(prevQuery => ({...prevQuery, destination: e.target.value}))}
                 />
                 <datalist id="datalistOptions">
                 <option value="Polytechnique Yaounde"></option>
@@ -207,11 +209,11 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
                 </label>
                 <label className="input input-bordered flex items-center gap-2" style={{ width: "240px" }}>
                     <input
-                    type="text"
-                    className="grow"
-                    list="datalistNumber"
-                    onChange={(e) => setPassengers(e.target.value)}
-                    style={{ width: "50px" }}
+                      type="number"
+                      className="grow"
+                      list="datalistNumber"
+                      onChange={(e) => setFilters(prevFilter => ({...prevFilter, number_of_seats: parseInt(e.target.value)}))}
+                      style={{ width: "50px" }}
                     />
                     <span className="badge badge-info">Optional</span>
                 </label>
@@ -225,7 +227,7 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
             </div>
             </div>
           <div>  
-          <div className="d-flex flex-column">
+          <div className="d-flex flex-column mb-2">
           <label htmlFor="" className="fw-bold fs-8">
             Departure date
           </label>
@@ -233,8 +235,9 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
             type="date"
             name=""
             id=""
-            className="form-control date-input" styles={{borderRadius: '25px'}}
-            onChange={(e) => setDate(e.target.value)}
+            className="form-control date-input w-100"
+            styles={{borderRadius: '25px', width: '50%'}}
+            onChange={(e) => setFilters(prevFilter => ({...prevFilter, date: e.target.value}))}
           />
         </div>
         <div className="d-flex flex-column">
@@ -245,8 +248,8 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
             type="time"
             name=""
             id=""
-            className="form-control time-input"
-            onChange={(e) => setTime(e.target.value)}
+            className="form-control time-input w-100"
+            onChange={(e) => setFilters(prevFilter => ({...prevFilter, time: e.target.value}))}
           />
         </div>
         </div>
@@ -258,8 +261,7 @@ export function MainSearch({setOrigin, setDestination, setDate, setTime, setPass
 }
 
 
-export function VehiclesField({vehicle, setVehicle}) {
-
+export function VehiclesField({filters, setFilters}) {
   return (
     <div id="VehiclesField">
       <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
@@ -270,7 +272,7 @@ export function VehiclesField({vehicle, setVehicle}) {
         list="datalistVehicle"
         id="vehicleData"
         placeholder="Vehicle"
-        onChange={(e) => setVehicle(e.target.value)}
+        onChange={(e) => setFilters(prevFilter => ({...prevFilter, vehicle_type: e.target.value}))}
       />
       <datalist id="datalistVehicle">
         <option value="Personal Car"></option>
@@ -283,45 +285,65 @@ export function VehiclesField({vehicle, setVehicle}) {
   );
 }
 
-export function PriceField(price, setPrice) {
+export function PriceField({filters, setFilters}) {
   return (
     <div id="PriceField">
-      <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
-        Price
+      <label htmlFor="minPriceData" className="form-label fw-bold fs-8 m-0">
+        Min Price
       </label>
-      <input className="form-control inp-width inp-height" 
-      id="PriceData" 
-      placeholder="Price (FCFA)"
-      onChange={(e) => setPrice(e.target.value)}
-       />
+      <input 
+        className="form-control inp-width inp-height" 
+        id="minPriceData" 
+        placeholder="Min Price (FCFA)"
+        type="number"
+        onChange={(e) => setFilters(prevFilters => ({...prevFilters, min_price: parseFloat(e.target.value)}))}
+      />
+      <label htmlFor="maxPriceData" className="form-label fw-bold fs-8 m-0">
+        Max Price
+      </label>
+      <input 
+        className="form-control inp-width inp-height" 
+        id="maxPriceData" 
+        placeholder="Max Price (FCFA)"
+        type="number"
+        onChange={(e) => setFilters(prevFilters => ({...prevFilters, max_price: parseFloat(e.target.value)}))}
+      />
     </div>
   );
 }
 
-export function LuggageField(luggage, setLuggage) {
+export function LuggageField({filters, setFilters}) {
+  const handleLuggageChange = (e) => {
+    const { value, checked } = e.target;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      luggage_type: checked 
+        ? [...prevFilters.luggage_type, value]
+        : prevFilters.luggage_type.filter(type => type !== value)
+    }));
+  };
+
   return (
     <div id="LuggageField">
-      <label htmlFor="exampleDataList" className="form-label fw-bold fs-8 m-0">
-        Luggages
-      </label>
-      <input
-        className="form-control inp-width inp-height"
-        list="datalistLug"
-        id="lugData"
-        placeholder="Furnitures, animals, etc..."
-        onChange={(e) => setLuggage(e.target.value)}
-      />
-      <datalist id="datalistLug">
-        <option value="Bags"></option>
-        <option value="Food"></option>
-        <option value="furnitures"></option>
-        <option value="Animals"></option>
-        <option value="Other"></option>
-      </datalist>
+      <label className="form-label fw-bold fs-8 m-0">Luggages</label>
+      {["NORMAL", "ANIMALS", "FURNITURES","ELECTRONICS", "OTHER"].map(type => (
+        <div key={type} className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id={`luggage-${type}`}
+            value={type}
+            onChange={handleLuggageChange}
+            checked={filters.luggage_type.includes(type)}
+          />
+          <label className="form-check-label" htmlFor={`luggage-${type}`}>
+            {type}
+          </label>
+        </div>
+      ))}
     </div>
   );
 }
-
 
 export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, handleLuggageFieldCheckbox }){
       
@@ -330,15 +352,8 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
     <div style={{display: 'flex', gap: '20%'}}>      
         <div className="p_filter">
           <p style={{color: 'blue', fontWeight: 'bold', justifyContent: 'center', alignItems: 'center'}}>
-            Filters
+            More fields
           </p>
-        </div>
-        <div className="form-check form-check-inline">
-          <input className="form-check-input" type="checkbox" defaultValue="" id="flexCheckVehicles"
-            onClick={handleVehiclesFieldCheckbox}/>
-          <label className="form-check-label fw-bold fs-8" htmlFor="flexCheckVehicles">
-            vehicles
-          </label>
         </div>
 
         <div className="form-check form-check-inline ms-S">
@@ -353,16 +368,25 @@ export function Footer({ handleVehiclesFieldCheckbox, handlePriceFieldCheckbox, 
             Price
           </label>
         </div>
+
         <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            defaultValue=""
-            id="flexCheckLug"
-            onClick={handleLuggageFieldCheckbox}
-          />
-          <label className="form-check-label fw-bold fs-8" htmlFor="flexCheckLug">
-            Luggages
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    defaultValue=""
+                    id="flexCheckLug"
+                    onClick={handleLuggageFieldCheckbox}
+                  />
+                  <label className="form-check-label fw-bold fs-8" htmlFor="flexCheckLug">
+                    Luggages
+                  </label>
+                </div>
+
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="checkbox" defaultValue="" id="flexCheckVehicles"
+            onClick={handleVehiclesFieldCheckbox}/>
+          <label className="form-check-label fw-bold fs-8" htmlFor="flexCheckVehicles">
+            vehicles
           </label>
         </div>
      </div>   

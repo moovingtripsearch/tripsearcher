@@ -7,6 +7,7 @@ import TicketCard from './TicketCard';
 import RightBody from './RightBody';
 
 const MainMenu = () => {
+  
   const [isOpen, setIsOpen] = useState(false);
  
   const [categories, setCategories] = useState({
