@@ -135,6 +135,8 @@ export default function RightBody() {
             <option value="option1">Cheapest</option>
             <option value="option2">Costly</option>
             <option value="option3">Most popular</option>
+            <option value="option3">Newest</option>
+            <option value="option3">Oldest</option>
           </select>
         </div>
       </div>
