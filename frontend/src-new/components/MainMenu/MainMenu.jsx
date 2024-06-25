@@ -237,8 +237,8 @@ const MainMenu = () => {
         {results.map((trip) => (
           <TicketCard
             key={trip.trip_id}
-            agency={trip.station?.station_name || trip.agency.agency_name || ''} 
-            station={trip.station?.station_name || '' }
+            agency={trip.station.station_name}
+            station={trip.station.station_name}
             rating={3} // As rating is not provided in the data, we're using a default value
             //day={formatDateTime(trip._source.departure_time).split(' ')[0]}
             day={trip.departure_time?.substring(0, 10)}

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.trip.TripProject.model.LuggageType;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,13 +21,16 @@ import java.util.List;
 public class UserFilterOptions {
     private Double minPrice;
     private Double maxPrice;
-    private List<LuggageType> luggageType;
+    private String[] luggageType;
     private String vehicleType;
     private Integer numberOfSeats;
     private String agencyName;
-    private Boolean allowOriginAsStopPoint;
-    private Boolean allowDestinationAsStopPoint;
+    private Boolean allowOriginAsStopPoint = true;
+    private Boolean allowDestinationAsStopPoint = true;
     private Double maxDistanceFromStation;
+    private String date;
+    private String time;
+    private Object tripDuration;
 
     static public UserFilterOptions parseJsonStringToEntity(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();

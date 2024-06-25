@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,20 +19,24 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Trip {
     @Id
-    @Field(name="trip_id", type = FieldType.Keyword)
+    @Field(name = "trip_id", type = FieldType.Keyword)
     private Long tripId;
 
-    @Field(type = FieldType.Date, name = "departure_time")
-    private DateTime departureTime;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis)
+    private LocalDateTime departureTime;
+
 
     @Field(type = FieldType.Long)
     private Long price;
 
-    @Field(name="is_active")
+    @Field(name = "is_active")
     private boolean isActive;
 
     @Field(type = FieldType.Nested)
     private Vehicle vehicle;
+
+    @Field(type = FieldType.Nested)
+    private Agency agency;
 
     @Field(type = FieldType.Nested)
     private Station station;
@@ -45,6 +50,6 @@ public class Trip {
     @Field(type = FieldType.Nested, name = "stop_points")
     private List<StopPoint> stopPoints;
 
-    @Field(type = FieldType.Keyword, name="trip_type")
+    @Field(type = FieldType.Keyword, name = "trip_type")
     private String tripType;
 }

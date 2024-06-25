@@ -16,7 +16,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 public class UserQuery {
     private String origin;
     private String destination;
-    private TripType tripType;
+    private String tripType;
     private GeoPoint geoLocation;
 
     static public UserQuery parseJsonStringToEntity(String jsonString) {

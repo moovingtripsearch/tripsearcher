@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Data
 @RequiredArgsConstructor
 public class TripService {
-//    private final TripRepository tripRepository;
+    //    private final TripRepository tripRepository;
     private final TripCustomRepository tripCustomRepository;
 
 //    public void save(final Trip trip){
@@ -26,8 +26,12 @@ public class TripService {
 //        return tripRepository.findById(id).orElse(null);
 //    }
 
-    public SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters, UserSortOptions sortOptions) {
-        return tripCustomRepository.searchTrip(input, filters, sortOptions);
+    public SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters) {
+        return tripCustomRepository.searchTrip(input, filters);
+    }
+
+    public SearchHits<Trip> searchAll() {
+        return tripCustomRepository.searchAll();
     }
 
 }

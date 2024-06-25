@@ -28,69 +28,75 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     IndexCoordinates index = IndexCoordinates.of("trip");
 
-    public SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters, UserSortOptions sortOptions) {
+    public SearchHits<Trip> searchAll() {
         NativeQuery searchQuery = NativeQuery.builder()
-                .withQuery(q -> {
-                    return q.bool(b0 -> b0
-                            .must(Arrays.asList(
-                                    QueryBuilders.match(m -> m.field("is_active").query(true)),
-                                    QueryBuilders.match(m -> m.field("trip_type").query(input.getTripType().getValue())),
-                                    QueryBuilders.bool(b1 -> {
-                                        List<Query> queryList = new ArrayList<>();
+                .withQuery(q -> q.bool(b0 -> b0
+                        .must(QueryBuilders.match(m -> m.field("is_active").query(true))
+                        ))).build();
+        return operations.search(searchQuery, Trip.class, index);
+    }
+
+    public SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters) {
+        NativeQuery searchQuery = NativeQuery.builder()
+                .withQuery(q -> q.bool(b0 -> b0
+                        .must(Arrays.asList(
+                                QueryBuilders.match(m -> m.field("is_active").query(true)),
+                                QueryBuilders.match(m -> m.field("trip_type").query(input.getTripType())),
+                                QueryBuilders.bool(b1 -> {
+                                    List<Query> queryList = new ArrayList<>();
+                                    queryList.add(
+                                            QueryBuilders.bool(b2 -> b2
+                                                    .must(Arrays.asList(
+                                                            QueryBuilders.nested(ns -> ns.path("origin").query(q1 -> q1.match(m -> m.field("origin.name").query(input.getOrigin())))),
+                                                            QueryBuilders.nested(ns -> ns.path("destination").query(q1 -> q1.match(m -> m.field("destination.name").query(input.getDestination()))))
+                                                    )))
+                                    );
+
+                                    if (filters.getAllowDestinationAsStopPoint()) {
                                         queryList.add(
                                                 QueryBuilders.bool(b2 -> b2
                                                         .must(Arrays.asList(
                                                                 QueryBuilders.nested(ns -> ns.path("origin").query(q1 -> q1.match(m -> m.field("origin.name").query(input.getOrigin())))),
+                                                                QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
+                                                                        QueryBuilders.match(m -> m.field("stop_points.drop").query(true)),
+                                                                        QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getDestination()))
+                                                                )))))
+                                                        )))
+                                        );
+                                    }
+
+                                    if (filters.getAllowOriginAsStopPoint()) {
+                                        queryList.add(
+                                                QueryBuilders.bool(b2 -> b2
+                                                        .must(Arrays.asList(
+                                                                QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
+                                                                        QueryBuilders.match(m -> m.field("stop_points.pickup").query(true)),
+                                                                        QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getOrigin()))
+                                                                ))))),
                                                                 QueryBuilders.nested(ns -> ns.path("destination").query(q1 -> q1.match(m -> m.field("destination.name").query(input.getDestination()))))
                                                         )))
                                         );
+                                    }
 
-                                        if (filters.getAllowDestinationAsStopPoint()) {
-                                            queryList.add(
-                                                    QueryBuilders.bool(b2 -> b2
-                                                            .must(Arrays.asList(
-                                                                    QueryBuilders.nested(ns -> ns.path("origin").query(q1 -> q1.match(m -> m.field("origin.name").query(input.getOrigin())))),
-                                                                    QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
-                                                                            QueryBuilders.match(m -> m.field("stop_points.drop").query(true)),
-                                                                            QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getDestination()))
-                                                                    )))))
-                                                            )))
-                                            );
-                                        }
+                                    if (filters.getAllowOriginAsStopPoint() && filters.getAllowDestinationAsStopPoint()) {
+                                        queryList.add(
+                                                QueryBuilders.bool(b2 -> b2
+                                                        .must(Arrays.asList(
+                                                                QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
+                                                                        QueryBuilders.match(m -> m.field("stop_points.pickup").query(true)),
+                                                                        QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getOrigin()))
+                                                                ))))),
+                                                                QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
+                                                                        QueryBuilders.match(m -> m.field("stop_points.drop").query(true)),
+                                                                        QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getDestination()))
+                                                                )))))
+                                                        )))
+                                        );
+                                    }
 
-                                        if (filters.getAllowOriginAsStopPoint()) {
-                                            queryList.add(
-                                                    QueryBuilders.bool(b2 -> b2
-                                                            .must(Arrays.asList(
-                                                                    QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
-                                                                            QueryBuilders.match(m -> m.field("stop_points.pickup").query(true)),
-                                                                            QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getOrigin()))
-                                                                    ))))),
-                                                                    QueryBuilders.nested(ns -> ns.path("destination").query(q1 -> q1.match(m -> m.field("destination.name").query(input.getDestination()))))
-                                                            )))
-                                            );
-                                        }
-
-                                        if (filters.getAllowOriginAsStopPoint() && filters.getAllowDestinationAsStopPoint()) {
-                                            queryList.add(
-                                                    QueryBuilders.bool(b2 -> b2
-                                                            .must(Arrays.asList(
-                                                                    QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
-                                                                            QueryBuilders.match(m -> m.field("stop_points.pickup").query(true)),
-                                                                            QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getOrigin()))
-                                                                    ))))),
-                                                                    QueryBuilders.nested(ns -> ns.path("stop_points").query(q1 -> q1.bool(b3 -> b3.must(Arrays.asList(
-                                                                            QueryBuilders.match(m -> m.field("stop_points.drop").query(true)),
-                                                                            QueryBuilders.match(m -> m.field("stop_points.point.name").query(input.getDestination()))
-                                                                    )))))
-                                                            )))
-                                            );
-                                        }
-
-                                        return b1.should(queryList);
-                                    })
-                            )));
-                })
+                                    return b1.should(queryList);
+                                })
+                        ))))
                 .withFilter(f -> {
                     if (filters.getAgencyName() != null)
                         f.match(m0 -> m0.field("agency_name").query(filters.getAgencyName()));
@@ -102,15 +108,16 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                             range.gte(JsonData.of(filters.getMinPrice()));
                         f.range(range.build());
                     }
-//                    if (filters.getLuggageType() != null && !filters.getLuggageType().isEmpty())
-//                        f.terms(t0 -> t0.field("luggage_type").terms(TermsQueryField.of( y -> y.value(filters.getLuggageType())));
+//                    if (filters.getLuggageType() != null && !(filters.getLuggageType().length == 0)) {
+//                        f.terms(t0 -> t0.field("luggage_type").terms(filters.getLuggageType());
+//                    }
                     if (filters.getVehicleType() != null)
                         f.term(t0 -> t0.field("vehicle.vehicle_type").value(filters.getVehicleType()));
                     if (filters.getNumberOfSeats() != null)
                         f.range(r0 -> r0.field("number_of_seats").gte(JsonData.of(filters.getNumberOfSeats())));
-                    if (input.getGeoLocation() != null && filters.getMaxDistanceFromStation() != null)
-                        f.geoDistance(gd -> gd.field("station.location").distanceType(GeoDistanceType.Plane).location(l0 -> l0.latlon(l1 -> l1.lat(input.getGeoLocation().getLat()).lon(input.getGeoLocation().getLon()))));
-
+//                    if (input.getGeoLocation() != null && filters.getMaxDistanceFromStation() != null)
+//                        f.geoDistance(gd -> gd.field("station.location").distanceType(GeoDistanceType.Plane).location(l0 -> l0.latlon(l1 -> l1.lat(input.getGeoLocation().getLat()).lon(input.getGeoLocation().getLon()))));
+//
                     return f;
                 })
                 .build();

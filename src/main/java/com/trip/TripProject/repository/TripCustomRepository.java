@@ -6,6 +6,10 @@ import com.trip.TripProject.helper.UserSortOptions;
 import com.trip.TripProject.model.Trip;
 import org.springframework.data.elasticsearch.core.SearchHits;
 
+import java.util.List;
+
 public interface TripCustomRepository {
-    SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters, UserSortOptions sortOptions);
+    SearchHits<Trip> searchTrip(UserQuery input, UserFilterOptions filters);
+
+    SearchHits<Trip> searchAll();
 }

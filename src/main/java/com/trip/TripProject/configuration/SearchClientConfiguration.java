@@ -16,7 +16,7 @@ import org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy;
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "com.trip.TripProject.repository")
-@ComponentScan(basePackages = {"com.trip.TripProject"})
+//@ComponentScan(basePackages = {"com.trip.TripProject"})
 public class SearchClientConfiguration extends ElasticsearchConfiguration {
     @Override
     public ClientConfiguration clientConfiguration() {
