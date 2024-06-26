@@ -2,9 +2,9 @@ services:
   - type: web
     name: ts-springboot
     env: docker
-    repo: https://github.com/moovingtripsearch/your-repo
+    repo: https://github.com/moovingtripsearch/tripsearcher
     branch: main
-    dockerfilePath: Dockerfile-springboot
+    dockerfilePath: ./Dockerfile-springboot
     buildCommand: gradle build
     startCommand: java -jar build/libs/your-app.jar
     envVars:
@@ -18,9 +18,9 @@ services:
   - type: public
     name: ts-elasticsearch
     env: docker
-    repo: https://github.com/moovingtripsearch/your-repo
+    repo: https://github.com/moovingtripsearch/tripsearcher
     branch: main
-    dockerfilePath: Dockerfile-elasticsearch
+    dockerfilePath: ./Dockerfile-elasticsearch
     plan: free
     ports:
       - port: 9200
@@ -40,9 +40,9 @@ services:
   - type: public
     name: ts-kibana
     env: docker
-    repo: https://github.com/moovingtripsearch/your-repo
+    repo: https://github.com/moovingtripsearch/tripsearcher
     branch: main
-    dockerfilePath: Dockerfile-kibana
+    dockerfilePath: ./Dockerfile-kibana
     plan: free
     ports:
       - port: 5601
