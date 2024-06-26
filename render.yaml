@@ -1,0 +1,58 @@
+services:
+  - type: web
+    name: ts-springboot
+    env: docker
+    repo: https://github.com/moovingtripsearch/your-repo
+    branch: main
+    dockerfilePath: Dockerfile-springboot
+    buildCommand: gradle build
+    startCommand: java -jar build/libs/your-app.jar
+    envVars:
+      - key: SPRING_ELASTICSEARCH_URIS
+        value: "http://ts-elasticsearch:9200"
+    plan: free
+    ports:
+      - port: 8080
+        protocol: TCP
+
+  - type: public
+    name: ts-elasticsearch
+    env: docker
+    repo: https://github.com/moovingtripsearch/your-repo
+    branch: main
+    dockerfilePath: Dockerfile-elasticsearch
+    plan: free
+    ports:
+      - port: 9200
+        protocol: TCP
+      - port: 9300
+        protocol: TCP
+    envVars:
+      - key: ES_JAVA_OPTS
+        value: "-Xmx512m -Xms512m"
+      - key: node.name
+        value: es01
+      - key: xpack.security.enabled
+        value: "false"
+      - key: cluster.name
+        value: "trip-search-cluster"
+
+  - type: public
+    name: ts-kibana
+    env: docker
+    repo: https://github.com/moovingtripsearch/your-repo
+    branch: main
+    dockerfilePath: Dockerfile-kibana
+    plan: free
+    ports:
+      - port: 5601
+        protocol: TCP
+      - port: 9600
+        protocol: TCP
+    envVars:
+      - key: SERVER_NAME
+        value: ts-kibana
+      - key: ELASTICSEARCH_HOSTS
+        value: "http://ts-elasticsearch:9200"
+      - key: ES_JAVA_OPTS
+        value: "-Xmx512m -Xms512m"

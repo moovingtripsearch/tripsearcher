@@ -1,7 +1,9 @@
 # ts => trip-search is a general prefix
 services:
   ts-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.2
+    build:
+      context: .
+      dockerfile: Dockerfile-elasticsearch
     container_name: ts-elasticsearch
     ports:
       - '9200:9200'
@@ -14,9 +16,14 @@ services:
       cluster.name: trip-search-cluster  # Corrected cluster name
     networks:
       - ts-elasticnet
+    volumes:
+      - ./elastic/data:/var/lib/elasticsearch
+      - ./elastic/logs:/var/log/elasticsearch
 
   ts-kibana:
-    image: docker.elastic.co/kibana/kibana:8.13.2
+    build:
+      context: .
+      dockerfile: Dockerfile-kibana
     container_name: ts-kibana
     ports:
       - '5601:5601'
@@ -33,17 +40,21 @@ services:
   ts-springboot:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-springboot
     container_name: ts-springboot
+    restart: always
     ports:
       - "8080:8080"
+    networks:
+      - ts-elasticnet
     depends_on:
       - ts-elasticsearch
     environment:
-      - SPRING_ELASTICSEARCH_URIS=http://ts-elasticsearch:9200  # Corrected Elasticsearch URL
+      - SPRING_ELASTICSEARCH_URIS=ts-elasticsearch:9200  # Corrected Elasticsearch URL
 
 networks:
   ts-elasticnet:
+    driver: bridge
 
 volumes:
   esdata:

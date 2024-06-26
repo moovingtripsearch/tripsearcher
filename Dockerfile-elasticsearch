@@ -1,0 +1,9 @@
+FROM  docker.elastic.co/elasticsearch/elasticsearch:8.13.2
+ENV discovery.type=single-node
+ENV ES_JAVA_OPTS="-Xmx512m -Xms512m"
+ENV node.name="es01"
+ENV xpack.security.enabled=false
+ENV cluster.name="trip-search-cluster"
+
+VOLUME /var/lib/elasticsearch
+VOLUME /var/log/elasticsearch
