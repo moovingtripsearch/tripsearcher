@@ -1,14 +1,17 @@
 package com.mooving.tripsearch.model;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Document(indexName = "points")
 @Setting(settingPath = "es-config/elastic-analyzer.json")
-public class Point {
+public class PointOfInterest {
     @Id
     private String id;
 
@@ -20,10 +23,7 @@ public class Point {
 
     @MultiField(
             mainField = @Field(type = FieldType.Text, analyzer = "autocomplete_index", searchAnalyzer = "autocomplete_search"),
-            otherFields = {
-//                    This for sorting
-                    @InnerField(suffix = "keyword", type = FieldType.Keyword)
-            }
+            otherFields = {@InnerField(suffix = "keyword", type = FieldType.Keyword)}
     )
     private String name;
 }

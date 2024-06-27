@@ -11,12 +11,12 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Station {
     @Id
-    @Field(name="station_id")
+    @Field(name = "station_id")
     private long stationId;
 
-    @Field(name="station_name")
+    @Field(name = "station_name")
     private String stationName;
 
-    @Field(type = FieldType.Nested, name="station_location")
-    private Point stationLocation;
+    @Field(name = "point_id")
+    private long pointId;
 }

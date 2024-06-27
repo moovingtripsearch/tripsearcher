@@ -1,5 +1,7 @@
 package com.mooving.tripsearch.model;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -9,13 +11,14 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.util.List;
 
 @Data
-@Document(indexName = "agency")
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Agency {
     @Id
-    @Field(name="agency_id")
+    @Field(name = "agency_id")
     private long agencyId;
 
-    @Field(name="agency_name")
+    @Field(name = "agency_name")
     private String agencyName;
 
     @Field(type = FieldType.Nested)  // Mark stations as nested objects
@@ -24,7 +27,6 @@ public class Agency {
     @Field(type = FieldType.Nested)  // Mark vehicles as nested objects
     private List<Vehicle> vehicles;
 
-    @Field(name= "luggage_types", type=FieldType.Nested)
-    private List<String> luggageTypes;
-
+    @Field(type = FieldType.Text)
+    private String phoneNumber;
 }

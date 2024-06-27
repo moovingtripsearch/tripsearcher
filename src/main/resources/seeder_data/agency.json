@@ -1,0 +1,252 @@
+[
+  {
+    "agency_id": 1,
+    "agency_name": "North Bend",
+    "phone_number": "+380 (354) 124-5554"
+  },
+  {
+    "agency_id": 2,
+    "agency_name": "Springfield/Chicopee",
+    "phone_number": "+351 (554) 131-1223"
+  },
+  {
+    "agency_id": 3,
+    "agency_name": "Kimsquit Valley",
+    "phone_number": "+60 (657) 862-4823"
+  },
+  {
+    "agency_id": 4,
+    "agency_name": "Frenchville",
+    "phone_number": "+86 (987) 623-8348"
+  },
+  {
+    "agency_id": 5,
+    "agency_name": "Alert",
+    "phone_number": "+48 (467) 909-9526"
+  },
+  {
+    "agency_id": 6,
+    "agency_name": "Hatton",
+    "phone_number": "+81 (701) 748-3497"
+  },
+  {
+    "agency_id": 7,
+    "agency_name": "Awaba",
+    "phone_number": "+86 (913) 608-6176"
+  },
+  {
+    "agency_id": 8,
+    "agency_name": "Bălți",
+    "phone_number": "+351 (652) 236-5524"
+  },
+  {
+    "agency_id": 9,
+    "agency_name": "Toccoa",
+    "phone_number": "+420 (254) 291-7889"
+  },
+  {
+    "agency_id": 10,
+    "agency_name": "Aioun El Atrouss",
+    "phone_number": "+1 (517) 989-7246"
+  },
+  {
+    "agency_id": 11,
+    "agency_name": "Skiros Island",
+    "phone_number": "+54 (307) 523-5317"
+  },
+  {
+    "agency_id": 12,
+    "agency_name": "Baia Mare",
+    "phone_number": "+86 (570) 772-2852"
+  },
+  {
+    "agency_id": 13,
+    "agency_name": "Ballina",
+    "phone_number": "+62 (838) 148-5452"
+  },
+  {
+    "agency_id": 14,
+    "agency_name": "Ann Arbor",
+    "phone_number": "+964 (400) 219-7469"
+  },
+  {
+    "agency_id": 15,
+    "agency_name": "Worland",
+    "phone_number": "+965 (208) 833-0900"
+  },
+  {
+    "agency_id": 16,
+    "agency_name": "Pirapora",
+    "phone_number": "+86 (849) 866-0451"
+  },
+  {
+    "agency_id": 17,
+    "agency_name": "Akure",
+    "phone_number": "+84 (594) 438-3376"
+  },
+  {
+    "agency_id": 18,
+    "agency_name": null,
+    "phone_number": "+351 (565) 601-9997"
+  },
+  {
+    "agency_id": 19,
+    "agency_name": "Mazatlán",
+    "phone_number": "+385 (425) 492-1348"
+  },
+  {
+    "agency_id": 20,
+    "agency_name": "Al-Ubayyid",
+    "phone_number": "+86 (828) 907-7443"
+  },
+  {
+    "agency_id": 21,
+    "agency_name": "Futuna Island",
+    "phone_number": "+62 (579) 595-5570"
+  },
+  {
+    "agency_id": 22,
+    "agency_name": "Sandringham Station",
+    "phone_number": "+976 (782) 525-9086"
+  },
+  {
+    "agency_id": 23,
+    "agency_name": "Kudahuvadhoo",
+    "phone_number": "+62 (586) 466-1760"
+  },
+  {
+    "agency_id": 24,
+    "agency_name": "Jurado",
+    "phone_number": "+351 (737) 697-0814"
+  },
+  {
+    "agency_id": 25,
+    "agency_name": "Ambon",
+    "phone_number": "+92 (637) 591-7546"
+  },
+  {
+    "agency_id": 26,
+    "agency_name": "Abilene",
+    "phone_number": "+351 (234) 177-7001"
+  },
+  {
+    "agency_id": 27,
+    "agency_name": "Akrotiri",
+    "phone_number": "+46 (121) 699-9710"
+  },
+  {
+    "agency_id": 28,
+    "agency_name": "Maringá",
+    "phone_number": "+86 (120) 657-3031"
+  },
+  {
+    "agency_id": 29,
+    "agency_name": "Fakfak-Papua Island",
+    "phone_number": "+30 (344) 399-7436"
+  },
+  {
+    "agency_id": 30,
+    "agency_name": "La Grande",
+    "phone_number": "+62 (667) 699-0034"
+  },
+  {
+    "agency_id": 31,
+    "agency_name": "Fort Campbell/Hopkinsville",
+    "phone_number": "+45 (843) 204-1655"
+  },
+  {
+    "agency_id": 32,
+    "agency_name": "Marsabit",
+    "phone_number": "+33 (303) 894-2576"
+  },
+  {
+    "agency_id": 33,
+    "agency_name": "Maiduguri",
+    "phone_number": "+420 (241) 255-1669"
+  },
+  {
+    "agency_id": 34,
+    "agency_name": "Manching",
+    "phone_number": "+55 (515) 130-0143"
+  },
+  {
+    "agency_id": 35,
+    "agency_name": "Villamontes",
+    "phone_number": "+86 (142) 613-6943"
+  },
+  {
+    "agency_id": 36,
+    "agency_name": "Creston",
+    "phone_number": "+7 (693) 157-9009"
+  },
+  {
+    "agency_id": 37,
+    "agency_name": "Moshi",
+    "phone_number": "+86 (819) 800-7642"
+  },
+  {
+    "agency_id": 38,
+    "agency_name": "Albuquerque",
+    "phone_number": "+86 (894) 569-2645"
+  },
+  {
+    "agency_id": 39,
+    "agency_name": "Quepos",
+    "phone_number": "+46 (409) 279-8421"
+  },
+  {
+    "agency_id": 40,
+    "agency_name": "Huangyan",
+    "phone_number": "+62 (302) 492-8272"
+  },
+  {
+    "agency_id": 41,
+    "agency_name": "Louis Trichardt",
+    "phone_number": "+7 (395) 372-4474"
+  },
+  {
+    "agency_id": 42,
+    "agency_name": "Rukumkot",
+    "phone_number": "+48 (574) 513-2104"
+  },
+  {
+    "agency_id": 43,
+    "agency_name": "Zhongwei",
+    "phone_number": "+62 (430) 853-9751"
+  },
+  {
+    "agency_id": 44,
+    "agency_name": "Kauehi",
+    "phone_number": "+48 (886) 291-0201"
+  },
+  {
+    "agency_id": 45,
+    "agency_name": "Guthrie",
+    "phone_number": "+7 (172) 426-3204"
+  },
+  {
+    "agency_id": 46,
+    "agency_name": "Melo",
+    "phone_number": "+86 (411) 126-9527"
+  },
+  {
+    "agency_id": 47,
+    "agency_name": "Matane",
+    "phone_number": "+86 (435) 720-8329"
+  },
+  {
+    "agency_id": 48,
+    "agency_name": "Confresa",
+    "phone_number": "+86 (162) 133-1205"
+  },
+  {
+    "agency_id": 49,
+    "agency_name": "Santa Vitória Do Palmar",
+    "phone_number": "+351 (730) 503-3289"
+  },
+  {
+    "agency_id": 50,
+    "agency_name": "Patras",
+    "phone_number": "+380 (629) 458-1230"
+  }
+]

@@ -28,6 +28,7 @@ public class UserFilterOptions {
     private String date;
     private String time;
     private Object tripDuration;
+    private String vipOption;
 
     static public UserFilterOptions parseJsonStringToEntity(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -18,6 +18,7 @@ public class UserQuery {
     private String destination;
     private String tripType;
     private GeoPoint geoLocation;
+//    private Boolean isHome;
 
     static public UserQuery parseJsonStringToEntity(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();

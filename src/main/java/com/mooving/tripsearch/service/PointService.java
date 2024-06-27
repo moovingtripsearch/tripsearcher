@@ -1,9 +1,7 @@
 package com.mooving.tripsearch.service;
 
-import co.elastic.clients.elasticsearch._types.SortMode;
-import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
-import com.mooving.tripsearch.model.Point;
+import com.mooving.tripsearch.model.PointOfInterest;
 import com.mooving.tripsearch.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +24,8 @@ public class PointService {
     private ElasticsearchOperations operations;
     IndexCoordinates index = IndexCoordinates.of("points");
 
-    public List<Point> saveAll(List<Point> points) {
-        return (List<Point>) pointRepository.saveAll(points);
+    public List<PointOfInterest> saveAll(List<PointOfInterest> pointOfInterests) {
+        return (List<PointOfInterest>) pointRepository.saveAll(pointOfInterests);
     }
 
     public long count() {
@@ -38,17 +36,33 @@ public class PointService {
      * Town name auto-completion enabled
      *
      * @param keywords
+     * @param tripType
      * @return
      */
-    public List<Point> suggest(String keywords, Pageable pageable) {
+
+    public List<PointOfInterest> suggest(String keywords, String tripType, Pageable pageable) {
         NativeQuery query = NativeQuery.builder()
                 .withQuery(q0 ->
                         q0.match(m -> m.field("name").query(keywords).operator(Operator.Or))
                 )
+                .withFilter(f -> {
+                    if (tripType.equals("inter")) {
+                        return f.bool(b -> b
+                                .should(s -> s.match(m -> m.field("place").query("city").operator(Operator.Or)))
+                                .should(s -> s.match(m -> m.field("place").query("village").operator(Operator.Or)))
+                        );
+                    } else {
+                        return f.bool(b -> b
+                                .mustNot(m -> m.match(mq -> mq.field("place").query("city").operator(Operator.Or)))
+                                .mustNot(m -> m.match(mq -> mq.field("place").query("village").operator(Operator.Or)))
+                        );
+                    }
+                })
                 .withPageable(pageable)
                 .build();
 
-        SearchHits<Point> result = operations.search(query, Point.class, index);
+        SearchHits<PointOfInterest> result = operations.search(query, PointOfInterest.class, index);
         return result.stream().map(SearchHit::getContent).collect(Collectors.toList());
     }
+
 }

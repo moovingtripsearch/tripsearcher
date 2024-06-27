@@ -2,8 +2,11 @@ package com.mooving.tripsearch.seeders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mooving.tripsearch.model.PointOfInterest;
-import com.mooving.tripsearch.service.PointService;
+import com.mooving.tripsearch.model.Trip;
+import com.mooving.tripsearch.service.TripService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -13,13 +16,13 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class ESPointSeeders {
+public class ESTripSeeders {
 
     @Autowired
-    private PointService pointService;
+    private TripService tripService;
 
     private boolean isInitialized() {
-        return pointService.count() > 0;
+        return tripService.count() > 0;
     }
 
     @PostConstruct
@@ -27,15 +30,16 @@ public class ESPointSeeders {
         if (!isInitialized()) {
             try {
                 // Load JSON file
-                ClassPathResource resource = new ClassPathResource("seeder_data/points.json");
+                ClassPathResource resource = new ClassPathResource("seeder_data/generated_trips.json");
+
                 ObjectMapper mapper = new ObjectMapper();
 
                 // Parse JSON file to list of points
-                List<PointOfInterest> pointOfInterests = mapper.readValue(resource.getInputStream(), new TypeReference<>() {
+                List<Trip> trips = mapper.readValue(resource.getInputStream(), new TypeReference<>() {
                 });
 
                 // Save points to Elasticsearch
-                pointService.saveAll(pointOfInterests);
+                tripService.saveAll(trips);
                 System.out.println("Points data seeded successfully.");
             } catch (IOException e) {
                 e.printStackTrace();

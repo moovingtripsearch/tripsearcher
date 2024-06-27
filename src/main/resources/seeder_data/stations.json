@@ -1,0 +1,502 @@
+[
+  {
+    "station_id": 1,
+    "station_name": "Vaasa Airport",
+    "point_id": 2460695334
+  },
+  {
+    "station_id": 2,
+    "station_name": "Tanbar Airport",
+    "point_id": 2460663707
+  },
+  {
+    "station_id": 3,
+    "station_name": "Keshod Airport",
+    "point_id": 2467814222
+  },
+  {
+    "station_id": 4,
+    "station_name": "Bousso Airport",
+    "point_id": 7659505131
+  },
+  {
+    "station_id": 5,
+    "station_name": "Tampere-Pirkkala Airport",
+    "point_id": 2461017555
+  },
+  {
+    "station_id": 6,
+    "station_name": "West Wyalong Airport",
+    "point_id": 2460907089
+  },
+  {
+    "station_id": 7,
+    "station_name": "Enterprise Municipal Airport",
+    "point_id": 4775146513
+  },
+  {
+    "station_id": 8,
+    "station_name": "Cabo Rojo Airport",
+    "point_id": 1067304164
+  },
+  {
+    "station_id": 9,
+    "station_name": "Ipota Airport",
+    "point_id": 11006040590
+  },
+  {
+    "station_id": 10,
+    "station_name": "Tunica Municipal Airport",
+    "point_id": 2461915941
+  },
+  {
+    "station_id": 11,
+    "station_name": "Vista Field",
+    "point_id": 3956506339
+  },
+  {
+    "station_id": 12,
+    "station_name": "Sanandaj Airport",
+    "point_id": 2467972994
+  },
+  {
+    "station_id": 13,
+    "station_name": "CFB Greenwood",
+    "point_id": 3888945135
+  },
+  {
+    "station_id": 14,
+    "station_name": "Sancti Spiritus Airport",
+    "point_id": 2933152276
+  },
+  {
+    "station_id": 15,
+    "station_name": "Kornasoren Airfield",
+    "point_id": 2462073754
+  },
+  {
+    "station_id": 16,
+    "station_name": "Marree Airport",
+    "point_id": 3959194781
+  },
+  {
+    "station_id": 17,
+    "station_name": "Nueva Loja Airport",
+    "point_id": 2467973844
+  },
+  {
+    "station_id": 18,
+    "station_name": "Oroville Municipal Airport",
+    "point_id": 3037426440
+  },
+  {
+    "station_id": 19,
+    "station_name": "Ocean Falls Seaplane Base",
+    "point_id": 2933226681
+  },
+  {
+    "station_id": 20,
+    "station_name": "Priština International Airport",
+    "point_id": 2462073002
+  },
+  {
+    "station_id": 21,
+    "station_name": "Punia Airport",
+    "point_id": 9428584280
+  },
+  {
+    "station_id": 22,
+    "station_name": "Buchanan Airport",
+    "point_id": 2460662764
+  },
+  {
+    "station_id": 23,
+    "station_name": "Torrejón Airport",
+    "point_id": 2933161233
+  },
+  {
+    "station_id": 24,
+    "station_name": "Alberto Alcolumbre Airport",
+    "point_id": 2933152296
+  },
+  {
+    "station_id": 25,
+    "station_name": "False Island Seaplane Base",
+    "point_id": 2467973421
+  },
+  {
+    "station_id": 26,
+    "station_name": "Hector Silva Airstrip",
+    "point_id": 2460907835
+  },
+  {
+    "station_id": 27,
+    "station_name": "Çiğli Airport",
+    "point_id": 3037426655
+  },
+  {
+    "station_id": 28,
+    "station_name": "Coober Pedy Airport",
+    "point_id": 9620576226
+  },
+  {
+    "station_id": 29,
+    "station_name": "Alverca Air Base",
+    "point_id": 2462074338
+  },
+  {
+    "station_id": 30,
+    "station_name": "Plymouth Municipal Airport",
+    "point_id": 3001317285
+  },
+  {
+    "station_id": 31,
+    "station_name": "Agen-La Garenne Airport",
+    "point_id": 3967804447
+  },
+  {
+    "station_id": 32,
+    "station_name": "Coonabarabran Airport",
+    "point_id": 2460695574
+  },
+  {
+    "station_id": 33,
+    "station_name": "Cloncurry Airport",
+    "point_id": 2461916409
+  },
+  {
+    "station_id": 34,
+    "station_name": "Parry Sound/Frying Pan Island-Sans Souci Seaplane Base",
+    "point_id": 2460695278
+  },
+  {
+    "station_id": 35,
+    "station_name": "Natashquan Airport",
+    "point_id": 3779577728
+  },
+  {
+    "station_id": 36,
+    "station_name": "Council Bluffs Municipal Airport",
+    "point_id": 3029264331
+  },
+  {
+    "station_id": 37,
+    "station_name": "Apalapsili Airport",
+    "point_id": 2467973472
+  },
+  {
+    "station_id": 38,
+    "station_name": "Twentynine Palms Airport",
+    "point_id": 2460907229
+  },
+  {
+    "station_id": 39,
+    "station_name": "Liupanshui Yuezhao Airport",
+    "point_id": 3037427497
+  },
+  {
+    "station_id": 40,
+    "station_name": "Dawson Creek Airport",
+    "point_id": 2462073927
+  },
+  {
+    "station_id": 41,
+    "station_name": "Santa Cruz do Sul Airport",
+    "point_id": 2284283052
+  },
+  {
+    "station_id": 42,
+    "station_name": "Thangool Airport",
+    "point_id": 5936358286
+  },
+  {
+    "station_id": 43,
+    "station_name": "Bhatinda Air Force Station",
+    "point_id": 5004930048
+  },
+  {
+    "station_id": 44,
+    "station_name": "Taskul Airport",
+    "point_id": 2460662943
+  },
+  {
+    "station_id": 45,
+    "station_name": "Viveros Island Airport",
+    "point_id": 3970697298
+  },
+  {
+    "station_id": 46,
+    "station_name": "Chester County G O Carlson Airport",
+    "point_id": 2460695243
+  },
+  {
+    "station_id": 47,
+    "station_name": "Moenjodaro Airport",
+    "point_id": 10883184035
+  },
+  {
+    "station_id": 48,
+    "station_name": "Lubbock Preston Smith International Airport",
+    "point_id": 2093006464
+  },
+  {
+    "station_id": 49,
+    "station_name": "Icy Bay Airport",
+    "point_id": 3001896144
+  },
+  {
+    "station_id": 50,
+    "station_name": "Chuathbaluk Airport",
+    "point_id": 2460908372
+  },
+  {
+    "station_id": 51,
+    "station_name": "Eskişehir Air Base",
+    "point_id": 3976099699
+  },
+  {
+    "station_id": 52,
+    "station_name": "Helsinki Malmi Airport",
+    "point_id": 2933223410
+  },
+  {
+    "station_id": 53,
+    "station_name": "Sievierodonetsk Airport",
+    "point_id": 2445859314
+  },
+  {
+    "station_id": 54,
+    "station_name": "Paruma Airport",
+    "point_id": 5936505011
+  },
+  {
+    "station_id": 55,
+    "station_name": "Tamana Island Airport",
+    "point_id": 3976031643
+  },
+  {
+    "station_id": 56,
+    "station_name": "Balıkesir Körfez Airport",
+    "point_id": 3037426539
+  },
+  {
+    "station_id": 57,
+    "station_name": "Presidente Prudente Airport",
+    "point_id": 2460907355
+  },
+  {
+    "station_id": 58,
+    "station_name": "Antonio Nery Juarbe Pol Airport",
+    "point_id": 2461016719
+  },
+  {
+    "station_id": 59,
+    "station_name": "Block Island State Airport",
+    "point_id": 3037426543
+  },
+  {
+    "station_id": 60,
+    "station_name": "Carutapera Airport",
+    "point_id": 2461017533
+  },
+  {
+    "station_id": 61,
+    "station_name": "Stavropol Shpakovskoye Airport",
+    "point_id": 6503460253
+  },
+  {
+    "station_id": 62,
+    "station_name": "West Woodward Airport",
+    "point_id": 3971322762
+  },
+  {
+    "station_id": 63,
+    "station_name": "Captain Auguste George Airport",
+    "point_id": 7798249071
+  },
+  {
+    "station_id": 64,
+    "station_name": "Fort Liard Airport",
+    "point_id": 3037426680
+  },
+  {
+    "station_id": 65,
+    "station_name": "Hiroshimanishi Airport",
+    "point_id": 3037427942
+  },
+  {
+    "station_id": 66,
+    "station_name": "Borrego Valley Airport",
+    "point_id": 2451742200
+  },
+  {
+    "station_id": 67,
+    "station_name": "Copenhagen Kastrup Airport",
+    "point_id": 2389012697
+  },
+  {
+    "station_id": 68,
+    "station_name": "Lalibella Airport",
+    "point_id": 3037426759
+  },
+  {
+    "station_id": 69,
+    "station_name": "Bagani Airport",
+    "point_id": 2386680424
+  },
+  {
+    "station_id": 70,
+    "station_name": "Concord Municipal Airport",
+    "point_id": 2461016302
+  },
+  {
+    "station_id": 71,
+    "station_name": "Constanza - Expedición 14 de Junio National Airport",
+    "point_id": 3037843889
+  },
+  {
+    "station_id": 72,
+    "station_name": "Benson Municipal Airport",
+    "point_id": 3017030725
+  },
+  {
+    "station_id": 73,
+    "station_name": "Mosul International Airport",
+    "point_id": 2461016997
+  },
+  {
+    "station_id": 74,
+    "station_name": "South Bimini Airport",
+    "point_id": 3037427079
+  },
+  {
+    "station_id": 75,
+    "station_name": "Blythe Airport",
+    "point_id": 2460907036
+  },
+  {
+    "station_id": 76,
+    "station_name": "Nara Airport",
+    "point_id": 3037427891
+  },
+  {
+    "station_id": 77,
+    "station_name": "Kribi Airport",
+    "point_id": 3037426355
+  },
+  {
+    "station_id": 78,
+    "station_name": "Butterworth Airport",
+    "point_id": 2933152297
+  },
+  {
+    "station_id": 79,
+    "station_name": "Summit Airport",
+    "point_id": 2461016231
+  },
+  {
+    "station_id": 80,
+    "station_name": "Manakara Airport",
+    "point_id": 5936505007
+  },
+  {
+    "station_id": 81,
+    "station_name": "Lyons-Rice County Municipal Airport",
+    "point_id": 3959311408
+  },
+  {
+    "station_id": 82,
+    "station_name": "Pietermaritzburg Airport",
+    "point_id": 2461016604
+  },
+  {
+    "station_id": 83,
+    "station_name": "São Joaquim Airport",
+    "point_id": 11010640339
+  },
+  {
+    "station_id": 84,
+    "station_name": "Tarapacá Airport",
+    "point_id": 2456087173
+  },
+  {
+    "station_id": 85,
+    "station_name": "Mombasa Moi International Airport",
+    "point_id": 3037427116
+  },
+  {
+    "station_id": 86,
+    "station_name": "Keglsugl Airport",
+    "point_id": 2460908328
+  },
+  {
+    "station_id": 87,
+    "station_name": "Diagoras Airport",
+    "point_id": 2461016512
+  },
+  {
+    "station_id": 88,
+    "station_name": "Laughlin Bullhead International Airport",
+    "point_id": 3965565599
+  },
+  {
+    "station_id": 89,
+    "station_name": "Kiman Airport",
+    "point_id": 2460908211
+  },
+  {
+    "station_id": 90,
+    "station_name": "Page Municipal Airport",
+    "point_id": 2467972989
+  },
+  {
+    "station_id": 91,
+    "station_name": "Russian Mission Airport",
+    "point_id": 2460663161
+  },
+  {
+    "station_id": 92,
+    "station_name": "Fishermans Airfield",
+    "point_id": 3600382095
+  },
+  {
+    "station_id": 93,
+    "station_name": "Fürstenfeldbruck Air Base",
+    "point_id": 4407928683
+  },
+  {
+    "station_id": 94,
+    "station_name": "False Island Seaplane Base",
+    "point_id": 1067306324
+  },
+  {
+    "station_id": 95,
+    "station_name": "Sumter Airport",
+    "point_id": 2467973010
+  },
+  {
+    "station_id": 96,
+    "station_name": "Campbell AAF (Fort Campbell) Air Field",
+    "point_id": 2461916078
+  },
+  {
+    "station_id": 97,
+    "station_name": "Koumala Airport",
+    "point_id": 2933225788
+  },
+  {
+    "station_id": 98,
+    "station_name": "Ama Airport",
+    "point_id": 3778299986
+  },
+  {
+    "station_id": 99,
+    "station_name": "Corvo Airport",
+    "point_id": 8450086722
+  },
+  {
+    "station_id": 100,
+    "station_name": "Tupile Airport",
+    "point_id": 4984567917
+  }
+]

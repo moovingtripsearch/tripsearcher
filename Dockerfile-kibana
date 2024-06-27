@@ -1,4 +1,0 @@
-FROM docker.elastic.co/kibana/kibana:8.13.2
-ENV SERVER_NAME="ts-kibana"
-ENV ELASTICSEARCH_HOSTS="http://ts-elasticsearch:9200"
-ENV ES_JAVA_OPTS="-Xmx512m -Xms512m"

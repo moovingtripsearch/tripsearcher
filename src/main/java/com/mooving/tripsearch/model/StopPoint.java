@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Data
 public class StopPoint {
     @Field(type = FieldType.Nested)
-    private Point point;
+    private PointOfInterest pointOfInterest;
 
     private boolean pickup;
 
